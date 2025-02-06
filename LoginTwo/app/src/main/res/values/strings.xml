@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LoginTwo</string>
+    <string name="user_prompt">user_prompt</string>
+    <string name="welcome">welcome!</string>
+    <string name="login">login</string>
+    <string name="password_prompt">password_prompt</string>
+</resources>
