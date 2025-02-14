@@ -2,6 +2,7 @@ package com.example.simplelist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         UserAdapter adapter = new UserAdapter(this, arrayOfUsers);
 
         // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.my_list_view);
+        ListView listView = findViewById(R.id.my_list_view);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                                     int position, long id) {
                 TextView phone = view.findViewById(R.id.phone);
                 String number = (String) phone.getText();
+
                 Toast.makeText(getApplicationContext(),number,Toast.LENGTH_SHORT).show();
             }
         });

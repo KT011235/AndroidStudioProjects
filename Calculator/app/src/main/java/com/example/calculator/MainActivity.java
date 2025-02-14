@@ -1,16 +1,14 @@
 package com.example.calculator;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private int var1;
@@ -69,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateAnswer() {
+
         buttonAdd.setBackgroundColor(getColor(R.color.grey));
         buttonSub.setBackgroundColor(getColor(R.color.grey));
+
         switch (operator) {
             case "+":
                 operator = "";
@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         buttonZero.setOnClickListener(v -> updateNumber(0 ));
 
         buttonAdd.setOnClickListener(v -> updateOperator("+"));
-
         buttonSub.setOnClickListener(v -> updateOperator("-"));
 
         buttonEqual.setOnClickListener(v -> calculateAnswer());
