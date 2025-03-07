@@ -1,4 +1,4 @@
-package com.example.listviewwithimages2;
+package com.example.dynamiclistview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,18 +17,18 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UserAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class HolidaySongsAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
     public static String EXTRA_SELECTED_ITEM = "my.selected.item";
-
     private Context context;
-    private ArrayList<User> arrayList;
-    private TextView name, phone;
-    private NetworkImageView image;
+    private List<HolidaySongs> arrayList;
+    private TextView albumName, artistName, danceability, duration_ms;
+    private NetworkImageView albumImg;
     private ImageLoader imageLoader;
     private RequestQueue queue;
 
-    public UserAdapter(Context context, ArrayList<User> arrayList) {
+    public HolidaySongsAdapter(Context context, List<HolidaySongs> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
 
@@ -42,11 +42,9 @@ public class UserAdapter extends BaseAdapter implements AdapterView.OnItemClickL
             public Bitmap getBitmap(String url) {
                 return mCache.get(url);
             }
-
             @Override
             public void putBitmap(String url, Bitmap bitmap) {
                 mCache.put(url, bitmap);
-
             }
         });
     }
@@ -68,33 +66,35 @@ public class UserAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.item_user,
-                parent, false );
-        name = convertView.findViewById(R.id.name);
-        phone = convertView.findViewById(R.id.phone);
-        image = (NetworkImageView) convertView.findViewById(R.id.networkImageView);
-        name.setText(arrayList.get(position).getName());
-        phone.setText(arrayList.get(position).getPhone());
-        image.setImageUrl(arrayList.get(position).getImageUrl(), imageLoader);
+        convertView = LayoutInflater.from(context).inflate(R.layout.item_album,
+                null);
+        albumName = convertView.findViewById(R.id.album_name);
+        artistName = convertView.findViewById(R.id.artist_name);
+        danceability = convertView.findViewById(R.id.danceability);
+        duration_ms = convertView.findViewById(R.id.duration_ms);
+        albumImg = (NetworkImageView) convertView.findViewById(R.id.album_img);
+        albumName.setText(arrayList.get(position).getAlbum_name());
+        artistName.setText(arrayList.get(position).getArtist_name());
+        danceability.setText(arrayList.get(position).getDanceability());
+        duration_ms.setText(arrayList.get(position).getDuration_ms());
+        albumImg.setImageUrl(arrayList.get(position).getAlbum_img(), imageLoader);
         return convertView;
     }
 
     public void populateView(View view, int index)
     {
-        User picked = arrayList.get(index);
+        HolidaySongs picked = arrayList.get(index);
 
-        TextView tv = view.findViewById(R.id.user_name);
-        tv.setText(picked.getName());
-        tv = view.findViewById(R.id.user_phone);
-        tv.setText(picked.getPhone());
+        TextView tv = view.findViewById(R.id.album_name);
+        tv.setText(picked.getAlbum_name());
 
-        NetworkImageView image = view.findViewById(R.id.userImageView);
-        image.setImageUrl(picked.getImageUrl(), imageLoader);
+        NetworkImageView image = view.findViewById(R.id.album_img);
+        image.setImageUrl(picked.getAlbum_img(), imageLoader);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = UserActivity.newIntent(adapterView.getContext(),
+        Intent intent = SongActivity.newIntent(adapterView.getContext(),
                 this);
         intent.putExtra(EXTRA_SELECTED_ITEM, i);
         adapterView.getContext().startActivity(intent);
