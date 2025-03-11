@@ -10,11 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="STORE NAME WILL GO HERE"
         android:textSize="16sp" />
 
     <LinearLayout
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:orientation="horizontal">
 
@@ -23,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="301 Chestnut St"
             android:textSize="16sp" />
 
         <TextView
@@ -37,7 +35,6 @@
             android:id="@+id/city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HARRISBURG"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -45,6 +42,5 @@
         android:id="@+id/phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="000-000-2222"
         android:textSize="16sp" />
 </LinearLayout>
