@@ -30,20 +30,20 @@ public class CustomerAdapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return 0;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(context).inflate(R.layout.layout_customer_list,
+        View mView = LayoutInflater.from(context).inflate(R.layout.layout_customer_list,
                 viewGroup, false);
-        name = view.findViewById(R.id.customer_name);
-        address = view.findViewById(R.id.customer_address);
-        phone = view.findViewById(R.id.customer_phone);
+        name = mView.findViewById(R.id.customer_name);
+        address = mView.findViewById(R.id.customer_address);
+        phone = mView.findViewById(R.id.customer_phone);
         name.setText(customers.get(i).getName());
         phone.setText(customers.get(i).getPhone());
         address.setText(customers.get(i).getAddress());
-        return view;
+        return mView;
     }
 }

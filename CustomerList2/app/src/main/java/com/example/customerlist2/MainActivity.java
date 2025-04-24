@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     protected ListView list;
-    protected String url = "http://10.0.0.107:5000/all";
-    //protected String url = "http://10.2.105.199:5000/all";
+    //protected String url = "http://10.0.0.107:5000/all";
+    protected String url = "http://10.2.105.199:5000/all";
     private Gson gson;
     private FloatingActionButton button;
 
@@ -79,10 +79,23 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 JSONObject object = response.getJSONObject(i);
 
+                                List<String> newArrayComments = new ArrayList<String>();
+                                if (object.has("comments")) {
+                                    JSONArray arrayComments = object.getJSONArray("comments");
+                                    if (arrayComments != null) {
+
+                                        for (int n = 0; i < arrayComments.length(); n++) {
+                                            newArrayComments.add(arrayComments.get(i).toString());
+                                        }
+                                    }
+                                }
+
                                 customers.add(new Customer(
                                         object.getString("name"),
                                         object.getString("address"),
-                                        object.getString("phone")));
+                                        object.getString("phone"),
+                                        newArrayComments));
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -92,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         list.setAdapter(adapter);
                         list.setOnItemClickListener((parent, view, position, id) -> {
                             Intent intent = new Intent(MainActivity.this, CommentActivity.class);
+                            intent.putExtra("customer", customers.get(position));
                             startActivity(intent);
                         });
                     }
